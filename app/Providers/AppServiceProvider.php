@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Builder;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +24,16 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        //
-    }
+   
+
+    // public function boot()
+    // {
+    //     Schema::defaultStringLength(191);
+    // }
+
+    public function boot(Builder $builder)
+{
+    $builder->defaultStringLength(191);
+}
+
 }
