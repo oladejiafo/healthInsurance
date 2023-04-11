@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Claims extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'hcp_name',
+        'enrollee_name',
+        'created_at',
+        'updated_at',
+    ];
 }

@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="{{ asset('sass/app.scss') }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
           @livewireStyles
       
@@ -35,10 +36,12 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                {{-- {{ $slot }} --}}
+                @yield('content')
             </main>
         </div>
 
+        @stack('scripts')
         @stack('modals')
 
         @livewireScripts
