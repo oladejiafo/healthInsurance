@@ -15,10 +15,8 @@ class Authorization extends Migration
     {
         Schema::create('authorization', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('provider_id')
-             ->constrained('providers');
-            $table->foreignId('enrollee_id')
-             ->constrained('enrollees');
+            $table->foreignId('provider_id');
+            $table->foreignId('enrollee_id');
             $table->bigInteger('claim_id')->nullable();
             $table->string('disease_type')->nullable();
             $table->string('issuer_name')->nullable();

@@ -17,8 +17,7 @@ class Agelimit extends Migration
             $table->id();
             $table->integer('age_limit');
             $table->string('applicable_relationship')->nullable();
-            $table->foreignId('provider_id')
-            ->constrained('providers'); 
+            $table->foreignId('provider_id'); 
             $table->string('created_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
