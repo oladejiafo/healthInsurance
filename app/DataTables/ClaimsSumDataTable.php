@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ClaimsDataTable extends DataTable
+class ClaimsSumDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -29,10 +29,16 @@ class ClaimsDataTable extends DataTable
                 return $customer->month.' '.$customer->year;
             })
             ->addColumn('action', function ($row) {    
-                return '
-                <a href="/claims/' . $row->id . '/edit" class="btn btn-sm btn-primary">Edit</a> 
-                <a href="/claims/' . $row->id . '/del" class="btn btn-sm btn-danger">D<i class="i class="fa fa-trash"  aria-hidden="true" style="font-size:48px;"></i></a>';
+                $params = http_build_query([
+                    'hcp_name' => $row->hcp_name,
+                    'year' => $row->year,
+                    'month' => $row->month,
+                ]);
+                return '<a href="/claims?'.$params.'" class="btn btn-sm btn-success" style="font-size:16px"><i class="fa fa-angle-down" style="font-size:19px"></i> Open</a>';
             });
+            // ->addColumn('action', function ($row) {    
+            //     return '<a href="/claims" class="btn btn-sm btn-primary">Open</a>';
+            // });
     }
 
     /**
@@ -45,7 +51,11 @@ class ClaimsDataTable extends DataTable
 
     public function query()
     {
-        return Claims::query()->select();
+        return Claims::query()
+        ->selectRaw('hcp_name, month, year, COUNT(id) as claimcount, SUM(claim_amount) as sumamount')
+        ->groupBy('hcp_name','month', 'year')
+        ->orderBy('year', 'desc')
+        ->orderBy('month', 'desc');
     }
 
     /**
@@ -56,7 +66,7 @@ class ClaimsDataTable extends DataTable
     public function html(): HtmlBuilder
     { 
         return $this->builder()
-            ->setTableId('claims-table')
+            ->setTableId('claimsSum-table')
             ->minifiedAjax()
             ->dom('Bfrtip')
             ->orderBy(1)
@@ -64,17 +74,7 @@ class ClaimsDataTable extends DataTable
             ->columns($this->getColumns())
             ->ajax('')
             ->addAction(['width' => '80px'])
-            ->parameters($this->getBuilderParameters())
-            ->buttons([
-                Button::make('add'),
-                // Button::make('excel'),
-                // Button::make('csv'),
-                // Button::make('pdf'),
-                // Button::make('print'),
-                // Button::make('reset'),
-                // Button::make('reload')
-            ]);
-
+            ->parameters($this->getBuilderParameters());
     }
 
     /**
@@ -85,28 +85,11 @@ class ClaimsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-                
-            // Column::make('id'),
-            // Column::make('hcp_name'),
-            // Column::make('enrollee_name'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
-
-            Column::make('claim_date')->title('Date of Claim'),
-            Column::make('enrollee_code')->title('Enrollee Code'),
-            Column::make('enrollee_name')->title('Enrollee Name'),
-            // Column::make('hcp_code')->title('Provider Code'),
-            Column::make('hcp_name')->title('Provider Name'),
-            Column::make('authorization_code')->title('Authorization Code'),
-            Column::make('diagnosis')->title('Diagnosis'),
-            Column::make('claim_amount')->title('Claim Amount'),
             Column::make('period'),
-            // Column::computed('action')
-            //       ->exportable(false)
-            //       ->printable(false)
-            //       ->width(60)
-            //       ->addClass('text-center')
-            //       ->title('Action'),
+            Column::make('hcp_name')->title('Provider Name'),
+            Column::make('sumamount')->title('Total Claims Amount'),
+            Column::make('claimcount')->title('No. of Claims'),
+
         ];
     }
 
