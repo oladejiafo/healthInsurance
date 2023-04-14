@@ -1,4 +1,4 @@
-@extends('layouts.app')
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -21,35 +21,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-select-bs5/1.6.2/select.bootstrap5.css" integrity="sha512-N74eU0onpabU6KNW2ShXslYNJnoKf0iLFucife6BvgtOmTAYELsvKteItub2Utl6vuCMxn1zrBfousm0M3jEiQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-
-<style>
-
- body{
-        font-size: 13px;
- }
- th,td,tr {
-    font-size: 12px;
- }
- .btn-secondary {
-  color: #fff !important;
-  background-color: #5c636a !important;
-  border-color: #565e64 !important;
-}
-.btn-success {
-  color: #fff !important;
-  background-color: #157347 !important;
-  border-color: #146c43 !important;
-}
-.btn-sm {
-  font-size: 10px;
-}
-.card-header{
-    font-size: 16px;
-}
-</style>
+<link rel="stylesheet" href="{{ asset('css/claims.css')}}">
+@extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="card">
+        <div class="card" style="margin-top: 100px;">
             <div class="card-header">Claims Management</div>
             <div class="card-body" style="margin-top: 10px;">
                 {{ $dataTable->table([], true) }}

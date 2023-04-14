@@ -13,6 +13,7 @@
     + Miscellaneous Mixins
     + BlockQuote Mixins
     + Cards Mixins
+
     + Color Functions Mixins
     + Tooltips
     + popovers
@@ -7495,9 +7496,9 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #000;
+  color: #0f0f0f;
   text-align: left;
-  background-color: rgb(239, 233, 233); }
+  background-color: #fff; }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important; }
@@ -7894,19 +7895,19 @@ pre {
 
 @media (min-width: 576px) {
   .container, .container-sm {
-    max-width: 540px; } }
+    max-width: 100%; } }
 
 @media (min-width: 768px) {
   .container, .container-sm, .container-md {
-    max-width: 720px; } }
+    max-width: 100%; } }
 
 @media (min-width: 992px) {
   .container, .container-sm, .container-md, .container-lg {
-    max-width: 960px; } }
+    max-width: 100%; } }
 
 @media (min-width: 1200px) {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
-    max-width: 1140px; } }
+    max-width: 100%; } }
 
 .row {
   display: flex;
@@ -8601,11 +8602,11 @@ pre {
   border: 0; }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: #000000; }
+  background-color: #fff; }
 
 .table-hover tbody tr:hover {
   color: #212529;
-  background-color: #000000; }
+  background-color: #fff; }
 
 .table-primary,
 .table-primary > th,
@@ -8729,7 +8730,7 @@ pre {
 .table-dark,
 .table-dark > th,
 .table-dark > td {
-  background-color: #0c0c0c; }
+  background-color: #fff; }
 
 .table-dark th,
 .table-dark td,
@@ -8738,7 +8739,7 @@ pre {
   border-color: #818181; }
 
 .table-hover .table-dark:hover {
-  background-color: black; }
+  background-color: #fff; }
   .table-hover .table-dark:hover > td,
   .table-hover .table-dark:hover > th {
     background-color: black; }
@@ -8756,7 +8757,7 @@ pre {
 
 .table .thead-dark th, .jsgrid .jsgrid-table .thead-dark th {
   color: #fff;
-  background-color: #212529;
+  background-color: #fff;
   border-color: #454d55; }
 
 .table .thead-light th, .jsgrid .jsgrid-table .thead-light th {
@@ -9691,11 +9692,11 @@ fieldset:disabled .wizard > .actions a,
   .btn-outline-dark:not(:disabled):not(.disabled):active, .btn-outline-dark:not(:disabled):not(.disabled).active,
   .show > .btn-outline-dark.dropdown-toggle {
     color: #fff;
-    background-color: #0d0d0d;
+    background-color: #5a6677;
     border-color: #0d0d0d; }
     .btn-outline-dark:not(:disabled):not(.disabled):active:focus, .btn-outline-dark:not(:disabled):not(.disabled).active:focus,
     .show > .btn-outline-dark.dropdown-toggle:focus {
-      box-shadow: 0 0 0 0.2rem rgba(13, 13, 13, 0.5); }
+      box-shadow: 0 0 0 0.2rem #5a6677; }
 
 .btn-link {
   font-weight: 400;
@@ -9784,10 +9785,10 @@ input[type="button"].btn-block {
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: #000;
+  color: #ffffff;
   text-align: left;
   list-style: none;
-  background-color: #fff; /*#191c24*/
+  background-color: #252d37;
   background-clip: padding-box;
   border: 1px solid #2c2e33;
   border-radius: 0.25rem; }
@@ -9921,7 +9922,7 @@ input[type="button"].btn-block {
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #000;
+  color: #ffffff;
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;
@@ -9947,13 +9948,13 @@ input[type="button"].btn-block {
   padding: 0.5rem 1.5rem;
   margin-bottom: 0;
   font-size: 0.875rem;
-  color: #000;
+  color: #ffffff;
   white-space: nowrap; }
 
 .dropdown-item-text {
   display: block;
   padding: 0.25rem 1.5rem;
-  color: #000; }
+  color: #ffffff; }
 
 .btn-group, .fc .fc-button-group,
 .btn-group-vertical {
@@ -10791,7 +10792,7 @@ input[type="button"].btn-block {
     height: 1rem;
     pointer-events: none;
     content: "";
-    background-color: #adb5bd ;
+    background-color: #fff;
     border: #adb5bd solid 1px; }
   .custom-control-label::after {
     position: absolute;
@@ -10850,7 +10851,7 @@ input[type="button"].btn-block {
       .custom-switch .custom-control-label::after {
         transition: none; } }
   .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
-    background-color: #adb5bd ;
+    background-color: #fff;
     transform: translateX(0.75rem); }
   .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
     background-color: rgba(0, 123, 255, 0.5); }
@@ -11399,7 +11400,8 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  color: #000;
+  background-color: #fff;  /*#191c24*/
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem; }
@@ -11607,14 +11609,14 @@ input[type="button"].btn-block {
   margin-left: -1px;
   line-height: 1.25;
   color: #007bff;
-  background-color: #000000;
+  background-color: #5a6677;
   border: 1px solid #dee2e6; }
   .page-link:hover, .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a:hover,
   .jsgrid .jsgrid-pager .jsgrid-pager-page a:hover {
     z-index: 2;
     color: #0056b3;
     text-decoration: none;
-    background-color: #e9ecef;
+    background-color: #5a6677;
     border-color: #dee2e6; }
   .page-link:focus, .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a:focus,
   .jsgrid .jsgrid-pager .jsgrid-pager-page a:focus {
@@ -12389,7 +12391,7 @@ a.close.disabled {
 
 @media (min-width: 1200px) {
   .modal-xl {
-    max-width: 1140px; } }
+    max-width:90%; } }
 
 .tooltip {
   position: absolute;
@@ -15716,7 +15718,8 @@ body,
 html {
   overflow-x: hidden;
   padding-right: 0 !important;
-  background-color: #fff; }
+  background-color: #fff; /*#191c24*/ 
+}
 
 *:-moz-full-screen,
 *:-webkit-full-screen,
@@ -15761,7 +15764,7 @@ code {
 
 /* Footer */
 .footer {
-  background: #000000;
+  background: transparent;
   padding: 20px 1rem;
   transition: all 0.25s ease;
   -moz-transition: all 0.25s ease;
@@ -19027,7 +19030,7 @@ body.avgrund-active {
     color: #ffffff; }
 
 .fc-external-events .fc-event {
-  background: #fff;
+  background: #252d37;
   color: #ffffff;
   border-width: 0 0 0 4px;
   padding: 16px;
@@ -20354,14 +20357,14 @@ div.tagsinput {
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
-    background: #fff;
+    background: #fff;/*#252d37 */
     width: 244px;
     height: 70px; }
     @media (max-width: 991px) {
       .navbar .navbar-brand-wrapper {
         width: 55px; } }
     .navbar .navbar-brand-wrapper .navbar-brand {
-      color: #38425e;
+      color: #000;
       font-size: 1.5rem;
       line-height: 48px;
       margin-right: 0;
@@ -20450,7 +20453,7 @@ div.tagsinput {
       .navbar .navbar-menu-wrapper .count-indicator .count-number {
         position: absolute;
         border-radius: 100%;
-        border: 2px solid #fff; }
+        border: 2px solid #252d37; }
       .navbar .navbar-menu-wrapper .count-indicator .count-symbol {
         top: 17px;
         right: -3px;
@@ -20499,9 +20502,10 @@ div.tagsinput {
           align-items: center; }
           .navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link .navbar-profile .navbar-profile-name {
             white-space: nowrap;
+            color: #000;
             margin-left: 1rem; }
           .navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link .navbar-profile i {
-            color: #a7afb7; }
+            color: #000; }
         .navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link.create-new-button {
           padding: 0.375rem 0.75rem; }
       .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown {
@@ -20623,7 +20627,7 @@ div.tagsinput {
 /* Sidebar */
 .sidebar {
   min-height: calc(100vh - 70px);
-  background: #fff;
+  background: #252d37;
   font-weight: normal;
   padding: 0;
   width: 244px;
@@ -20637,14 +20641,14 @@ div.tagsinput {
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
-    background: #fff;
+    background: #252d37;
     width: 244px;
     height: 70px; }
     @media (max-width: 991px) {
       .sidebar .sidebar-brand-wrapper {
         width: 55px; } }
     .sidebar .sidebar-brand-wrapper .sidebar-brand {
-      color: #38425e;
+      color: #fff;
       font-size: 1.5rem;
       line-height: 48px;
       margin-right: 0;
@@ -20691,7 +20695,7 @@ div.tagsinput {
         align-items: center;
         white-space: nowrap;
         padding: 0.8rem 10px 0.8rem 1.188rem;
-        color: #6c7293;
+        color: #fff;
         -webkit-transition-duration: 0.45s;
         -moz-transition-duration: 0.45s;
         -o-transition-duration: 0.45s;
@@ -20724,7 +20728,7 @@ div.tagsinput {
             .sidebar .nav .nav-item .nav-link i.menu-arrow:before {
               content: "\f140";
               font-size: inherit;
-              color: inherit; }
+              color: #fff; }
         .sidebar .nav .nav-item .nav-link .menu-title {
           color: inherit;
           display: inline-block;
@@ -20801,7 +20805,7 @@ div.tagsinput {
               margin-right: 1rem; }
             .sidebar .nav .nav-item.profile .profile-desc .profile-name span {
               font-size: 12px;
-              color: #6c7293;
+              color: #fff;
               white-space: nowrap; }
             .sidebar .nav .nav-item.profile .profile-desc .profile-name h5 {
               white-space: nowrap; }
@@ -20814,7 +20818,7 @@ div.tagsinput {
               .sidebar .nav .nav-item.profile .profile-desc .profile-pic .count-indicator .count-number {
                 position: absolute;
                 border-radius: 100%;
-                border: 2px solid #fff; }
+                border: 2px solid #252d37; }
               .sidebar .nav .nav-item.profile .profile-desc .profile-pic .count-indicator .count-symbol {
                 top: 17px;
                 right: -3px;
@@ -20845,7 +20849,7 @@ div.tagsinput {
                 border: 2px solid #2c2e33; }
           .sidebar .nav .nav-item.profile .profile-desc .mdi-dots-vertical {
             font-size: 20px;
-            color: #6c7293; }
+            color: #fff; }
           .sidebar .nav .nav-item.profile .profile-desc .dropdown-menu {
             padding: 0;
             margin-top: 1.25rem; }
@@ -20866,7 +20870,7 @@ div.tagsinput {
         padding: 0.5rem 1.188rem;
         line-height: 1; }
         .sidebar .nav .nav-item.nav-category .nav-link {
-          color: #6c7293;
+          color: #000;
           font-weight: 500;
           font-size: 14px;
           font-weight: 500;
@@ -20883,7 +20887,7 @@ div.tagsinput {
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #ffffff; }
+        color: #000; }
         .sidebar .nav .nav-item .menu-icon i {
           font-size: 0.875rem; }
     .sidebar .nav.sub-menu {
@@ -20894,7 +20898,7 @@ div.tagsinput {
       .sidebar .nav.sub-menu .nav-item {
         padding: 0; }
         .sidebar .nav.sub-menu .nav-item .nav-link {
-          color: #6c7293;
+          color: #d6caca;
           padding: 0.5rem 0.35rem;
           position: relative;
           font-size: 0.855rem;
@@ -21051,7 +21055,7 @@ div.tagsinput {
           left: 70px;
           width: 190px; }
           .sidebar-dark.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse, .sidebar-dark.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
-            background: #fff; }
+            background: #252d37; }
           .rtl.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse, .rtl.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
             left: auto;
             right: 70px;
@@ -21067,7 +21071,7 @@ div.tagsinput {
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background-color: #6c7293;
+            background-color: #fff;
             position: absolute;
             left: 0; }
           .sidebar-icon-only .sidebar .nav.sub-menu .nav-item .nav-link:hover:before {
@@ -21126,7 +21130,7 @@ div.tagsinput {
       width: 100%; } }
 
 .content-wrapper {
-  background: #000000;
+  background: #eef1f4;
   padding: 1.875rem 1.75rem;
   width: 100%;
   -webkit-flex-grow: 1;
