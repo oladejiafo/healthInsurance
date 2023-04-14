@@ -30,4 +30,4 @@ Route::middleware([
 
 Route::get('/claims', [ClaimsController::class, 'claims'])->name('claims');
 
-Route::get('/claims-summary', [ClaimsController::class, 'claims_summary'])->name('claims_summary');
+Route::get('/claims-summary', [ClaimsController::class, 'claimsSummary'])->name('claimsSummary');

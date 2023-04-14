@@ -29,13 +29,12 @@
         <div class="card" style="padding-top: 100px;">
             <div class="card-header">Claims Management</div>
             <div class="card-body" style="margin-top: 10px;">
-                {{ $dataTable->table([], true) }}
+
             </div>
         </div>
     </div>
 @endsection
  
 @push('scripts')
-<!-- <link rel="stylesheet" href=""> -->
-    {{ $dataTable->scripts() }}
+
 @endpush

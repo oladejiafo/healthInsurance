@@ -34,10 +34,7 @@
             @endif
 
             <!-- Page Content -->
-            {{-- <main> --}}
-                {{-- {{ $slot }} --}}
                 @yield('content')
-            {{-- </main> --}}
 
             @include('footer')
         </div>

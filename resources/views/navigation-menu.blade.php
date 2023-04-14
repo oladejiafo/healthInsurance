@@ -99,7 +99,7 @@
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="#">Add New Claim</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('claims_summary') }}">Manage
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('claimsSummary') }}">Manage
                                     Claims</a></li>
                             <li class="nav-item"> <a class="nav-link" href="#">Capitation</a></li>
                         </ul>
