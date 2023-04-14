@@ -1,0 +1,24 @@
+
+body{
+    font-size: 13px;
+    color: #000;
+}
+th,td,tr {
+font-size: 12px;
+}
+.btn-secondary {
+color: #fff !important;
+background-color: #5c636a !important;
+border-color: #565e64 !important;
+}
+.btn-success {
+color: #fff !important;
+background-color: #157347 !important;
+border-color: #146c43 !important;
+}
+.btn-sm {
+font-size: 10px;
+}
+.card-header{
+font-size: 16px;
+}

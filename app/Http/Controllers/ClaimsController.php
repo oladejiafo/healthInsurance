@@ -8,8 +8,8 @@ use App\DataTables\ClaimsSumDataTable;
 
 class ClaimsController extends Controller
 {
-    public function index(ClaimsDataTable $dataTable) {
-        return $dataTable->render('claims.index');
+    public function claims(ClaimsDataTable $dataTable) {
+        return $dataTable->render('claims.claims');
     }
 
     public function claims_summary(ClaimsSumDataTable $claimsTable){

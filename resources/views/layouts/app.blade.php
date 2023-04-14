@@ -34,10 +34,12 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            {{-- <main> --}}
                 {{-- {{ $slot }} --}}
                 @yield('content')
-            </main>
+            {{-- </main> --}}
+
+            @include('footer')
         </div>
 
         @stack('scripts')
