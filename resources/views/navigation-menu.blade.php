@@ -24,6 +24,13 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../assets/images/favicon.png" />
+
+    <style>
+      .mdi {
+        color:#000;
+      }
+      body{width: 100%;}
+    </style>
   </head>
   <body>
     <div class="container-scroller">
@@ -42,13 +49,13 @@
                   <span class="count bg-success"></span>
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                  <span>Gold Member</span>
+                  <h5 class="mb-0 font-weight-normal">{{ Auth::user()->name }}</h5>
+                  {{-- <span>{{ Auth::user()->role }}</span> --}}
                 </div>
               </div>
               <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
               <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-                <a href="#" class="dropdown-item preview-item">
+                {{-- <a href="#" class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-dark rounded-circle">
                       <i class="mdi mdi-settings text-primary"></i>
@@ -57,7 +64,7 @@
                   <div class="preview-item-content">
                     <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
                   </div>
-                </a>
+                </a> --}}
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
@@ -69,7 +76,7 @@
                     <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
                   </div>
                 </a>
-                <div class="dropdown-divider"></div>
+                {{-- <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-dark rounded-circle">
@@ -79,13 +86,13 @@
                   <div class="preview-item-content">
                     <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
                   </div>
-                </a>
+                </a> --}}
               </div>
             </div>
           </li>
-          <li class="nav-item nav-category">
+          {{-- <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
-          </li>
+          </li> --}}
           <li class="nav-item menu-items">
             <a class="nav-link" href="{{ route('dashboard') }}">
               <span class="menu-icon">
@@ -312,11 +319,13 @@
                         </div>
                       </div>
                       <div class="preview-item-content">
-                        <p class="preview-subject mb-1">Profile/p>
+                        <p class="preview-subject mb-1">Profile</p>
                       </div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                      @csrf
+                    <a class="dropdown-item preview-item" href="{{ route('logout') }}" @click.prevent="$root.submit();">
                       <div class="preview-thumbnail">
                         <div class="preview-icon bg-dark rounded-circle">
                           <i class="mdi mdi-logout text-danger"></i>
@@ -324,15 +333,17 @@
                       </div>
                       <div class="preview-item-content">
                         <p class="preview-subject mb-1">
-                            <form method="POST" action="{{ route('logout') }}" x-data>
-                                @csrf
-                                <a href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
-                                </a>
-                            </form>
+                          {{-- <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf --}}
+
+                            {{-- <a style="decoration:none" href="{{ route('logout') }}" @click.prevent="$root.submit();"> --}}
+                                {{ __('Log Out') }}
+                            {{-- </a> --}}
+                        {{-- </form> --}}
                         </p>
                       </div>
                     </a>
+                  </form>
                     <div class="dropdown-divider"></div>
                   </div>
                 </li>
@@ -345,9 +356,11 @@
         <!-- partial -->
 
         <!-- main-panel ends -->
-      </div>
+      {{-- </div>
       <!-- page-body-wrapper ends -->
-    </div>
+    </div> --}}
+
+
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>

@@ -1,19 +1,17 @@
-<x-app-layout>
-    <x-slot name="header">
+{{-- <x-app-layout> --}}
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+    </x-slot> --}}
 
 <!-- Dashboard -->
+@extends('layouts.app')
 
+@section('content')
 <div class="main-panel">
           <div class="content-wrapper">
-            <div class="row">
+            {{-- <div class="row">
               <div class="col-12 grid-margin stretch-card">
                 <div class="card corona-gradient-card">
                   <div class="card-body py-0 px-0 px-sm-3">
@@ -34,7 +32,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
             <div class="row">
               <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                 <div class="card">
@@ -676,15 +674,17 @@
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-          <footer class="footer">
+          {{-- <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
               <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
               <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
             </div>
-          </footer>
+          </footer> --}}
           <!-- partial -->
         </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+    @endsection
+
+  {{-- </x-app-layout> --}}
