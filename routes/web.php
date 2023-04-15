@@ -28,6 +28,6 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/claims', [ClaimsController::class, 'claims'])->name('claims');
+Route::get('/claims/{hcp}/{month}/{year}', [ClaimsController::class, 'claims'])->name('claims');
 
 Route::get('/claims-summary', [ClaimsController::class, 'claimsSummary'])->name('claimsSummary');
