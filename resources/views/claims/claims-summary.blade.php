@@ -1,12 +1,14 @@
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-{{-- <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'> --}}
+<!-- <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'> -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.4/font/bootstrap-icons.min.css" integrity="sha512-yU7+yXTc4VUanLSjkZq+buQN3afNA4j2ap/mxvdr440P5aW9np9vIr2JMZ2E5DuYeC9bAoH9CuCR7SJlXAa4pg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/> -->
 <link rel="stylesheet" href="{{ asset('css/claims.css')}}">
-
+<link 
+  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+  rel="stylesheet"  type='text/css'>
 <!-- normalize CSS
   ============================================ -->
 <link rel="stylesheet" href="css/data-table/bootstrap-table.css">
@@ -54,24 +56,23 @@ select{
                             data-click-to-select="true" data-toolbar="#toolbar">
                             <thead>
                                 <tr>
-                                    <th data-field="date" width="16.6%">Date of Claim</th>
-                                    <th data-field="name" width="16.6%">Provider Name</th>
+                                    
+                                    <th data-field="name" width="30.6%">Provider Name</th>
                                     <th data-field="claims" width="16.6%">Number of Claims</th>
                                     <th data-field="amount" width="16.6%">Total Claims Amount</th>
-                                    <th data-field="month" width="16.6%">Month of Claim</th>
+                                    <th data-field="month" width="18.6%">Month of Claim</th>
                                     <th data-field="action" width="16.6%"></th>
                                 </tr>
                             </thead>
                             <tbody>
                               @foreach($claims as $claim)
                                 <tr>
-                                    <td width="16.6%">{{$claim->entry_date}}</td>
-                                    <td width="16.6%">{{$claim->hcp_name}}</td>
-                                    <td width="16.6%">{{$claim->ID}}</td>
-                                    <td width="16.6%">{{$claim->amt}}</td>
-                                    <td width="16.6%">{{$claim->month}} {{$claim->year}}</td>
-                                    <td width="16.6%" class="datatable-ct" style="text-align:center" align="center">
-                                      &nbsp;<a href="{{ url('claims', [$claim->hcp_name, $claim->month, $claim->year]) }}" class="btn btn-sm btn-success" title="CLICK HERE TO OPEN DETAILS FOR VETTING"> <i class="fa fa-angle-down" style="font-size:19px"></i></a></div> 
+                                    <td style="padding:5px" width="30.6%"> {{$claim->hcp_name}}</td>
+                                    <td style="padding:5px" width="16.6%"> {{$claim->ID}}</td>
+                                    <td style="padding:5px" width="16.6%"> {{$claim->amt}}</td>
+                                    <td style="padding:5px" width="18.6%"> {{$claim->month}} {{$claim->year}}</td>
+                                    <td style="padding:5px" width="16.6%" class="datatable-ct" style="text-align:center" align="center">
+                                      &nbsp;<a href="{{ url('claims') }}?{{ http_build_query([    'hcp_name' => $claim->hcp_name,    'month' => $claim->month,    'year' => $claim->year,]) }}" class="btn btn-sm btn-success" title="CLICK HERE TO OPEN DETAILS FOR VETTING"> <i class="fa fa-angle-down" style="font-size:19px"></i></a></div> 
                                     </td>
                                 </tr>
                               @endforeach

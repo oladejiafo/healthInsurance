@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use DB;
 use Session;
-// use App\DataTables\ClaimsDataTable;
-// use App\DataTables\ClaimsSumDataTable;
 
 class ClaimsController extends Controller
 {
@@ -20,19 +18,23 @@ class ClaimsController extends Controller
     //     return $claimsTable->render('claims.claims-summary');
     // }
 
-    public function claims($hcp, $month, $year) {
+    public function claims(Request $request) {
         if (Auth::id()) {
 
-            
-            // $ppay = family_breakdown::where('destination_id', '=', $id)
-            //     ->where('pricing_plan_type', '=', Session::get('packageType'))
-            //     ->where('no_of_parent', '=', $parentt)
-            //     ->where('no_of_children', '=', $kids)
-            //     ->where('status', 'CURRENT')
-            //     ->orderBy('sub_total', 'asc')
-            //     ->first();
+            $hcp_name = $request->query('hcp_name');
+            $month = $request->query('month');
+            $year = $request->query('year');
 
-            return view('claims.claims');
+            $claims = DB::table('claims')
+            ->select(DB::raw('id, `hcp_code`, `hcp_name`, `enrollee_code`, `enrollee_name`,`claim_amount`,`entry_date`, `authorization_code`, `month`, `year`,`status`, `diagnosis`'))
+            ->whereNotIn('status', ['Paid', 'Vetted', 'Approved'])
+            ->where('hcp_name', '=', $hcp_name)
+            ->where('year', '=', $year)
+            ->where('month','=', $month)
+            ->orderByDesc('id')
+            ->get();
+
+            return view('claims.claims',compact('claims'));
         } else {
             return redirect('/');
         }
@@ -43,9 +45,9 @@ class ClaimsController extends Controller
         if (Auth::id()) {
 
             $claims = DB::table('claims')
-            ->select(DB::raw('COUNT(id) as ID, `entry_date`, `hcp_code`, `hcp_name`, SUM(`claim_amount`) as amt, `status`, `month`, `year`'))
+            ->select(DB::raw('COUNT(id) as ID, `hcp_code`, `hcp_name`, SUM(`claim_amount`) as amt, `month`, `year`'))
             ->whereNotIn('status', ['Paid', 'Vetted', 'Approved'])
-            ->groupBy('hcp_code', 'hcp_name', 'month', 'year','entry_date','status')
+            ->groupBy('hcp_code', 'hcp_name', 'month', 'year')
             ->orderByDesc('id')
             ->get();
 
