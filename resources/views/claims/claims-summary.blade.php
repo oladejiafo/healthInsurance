@@ -18,7 +18,7 @@
 /* .btn-default {
   background-color: rgb(166, 43, 43) !important;
  } */
- .btn-default  i{
+ /* .btn-default  i{
   color: aliceblue !important;
   background-color: aliceblue !important;
   border-color: rgb(0, 255, 123) !important;
@@ -26,7 +26,7 @@
  }
 select{
   border-color: #000 !important; 
-}
+} */
 </style>
 
 @extends('layouts.app')
@@ -54,28 +54,27 @@ select{
                             data-click-to-select="true" data-toolbar="#toolbar">
                             <thead>
                                 <tr>
-                                    <th data-field="code" width="12.5%">HCP Code</th>
-                                    <th data-field="name" width="12.5%">HCP Name</th>
-                                    <th data-field="location" width="12.5%">Location</th>
-                                    <th data-field="phone" width="12.5%">Phone</th>
-                                    <th data-field="email" width="12.5%">email</th>
-                                    <th data-field="address" width="12.5%">Address</th>
-                                    <th data-field="tariff" width="12.5%">Tariff Type</th>
-                                    <th data-field="action" width="12.5%"></th>
+                                    <th data-field="date" width="16.6%">Date of Claim</th>
+                                    <th data-field="name" width="16.6%">Provider Name</th>
+                                    <th data-field="claims" width="16.6%">Number of Claims</th>
+                                    <th data-field="amount" width="16.6%">Total Claims Amount</th>
+                                    <th data-field="month" width="16.6%">Month of Claim</th>
+                                    <th data-field="action" width="16.6%"></th>
                                 </tr>
                             </thead>
                             <tbody>
+                              @foreach($claims as $claim)
                                 <tr>
-                                    <td width="12.5%"></td>
-                                    <td width="12.5%"></td>
-                                    <td width="12.5%"></td>
-                                    <td width="12.5%"></td>
-                                    <td width="12.5%"></td>
-                                    <td width="12.5%"></td>
-                                    <td width="12.5%"></td>
-                                    <td width="12.5%" class="datatable-ct">
+                                    <td width="16.6%">{{$claim->entry_date}}</td>
+                                    <td width="16.6%">{{$claim->hcp_name}}</td>
+                                    <td width="16.6%">{{$claim->ID}}</td>
+                                    <td width="16.6%">{{$claim->amt}}</td>
+                                    <td width="16.6%">{{$claim->month}} {{$claim->year}}</td>
+                                    <td width="16.6%" class="datatable-ct" style="text-align:center" align="center">
+                                      &nbsp;<a href="{{ url('claims', [$claim->hcp_name, $claim->month, $claim->year]) }}" class="btn btn-sm btn-success" title="CLICK HERE TO OPEN DETAILS FOR VETTING"> <i class="fa fa-angle-down" style="font-size:19px"></i></a></div> 
                                     </td>
                                 </tr>
+                              @endforeach
 
                             </tbody>
                         </table>
