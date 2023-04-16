@@ -23,10 +23,10 @@ class Clients extends Migration
             $table->string('email')->unique(); 
             $table->string('contact_person')->nullable();
             $table->string('contact_phone')->nullable();           
-            $table->string('status');
-            $table->date('date_joined');
-            $table->date('date_exited');
-            $table->date('date_suspended');
+            $table->string('status')->nullable();
+            $table->date('date_joined')->nullable();
+            $table->date('date_exited')->nullable();
+            $table->date('date_suspended')->nullable();
             $table->string('created_by')->nullable();
             $table->softDeletes();
             $table->timestamps();

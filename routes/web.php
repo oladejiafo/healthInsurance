@@ -35,3 +35,5 @@ Route::get('/claims-summary', [ClaimsController::class, 'claimsSummary'])->name(
 Route::get('/providers', [ClaimsController::class, 'providers'])->name('providers');
 
 Route::get('/enrollees', [ClaimsController::class, 'enrollees'])->name('enrollees');
+
+Route::get('/clients', [ClaimsController::class, 'clients'])->name('clients');

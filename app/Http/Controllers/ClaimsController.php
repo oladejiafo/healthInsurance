@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Claims;
 use App\Models\Providers;
 use App\Models\Enrollees;
+use App\Models\Clients;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -72,5 +73,13 @@ class ClaimsController extends Controller
         $enrollees = Enrollees::with('hcp')->get();
 
         return view('registers.enrollees', compact('enrollees'));
+    }
+
+    public function clients()
+    {
+        // $enrollees = Enrollees::all();
+        $clients = Clients::all();
+
+        return view('registers.clients', compact('clients'));
     }
 }

@@ -52,7 +52,7 @@
                         <td>{{ $enrollee->phone }}</td>
                         <td>{{ $enrollee->address }}</td>
                         <td>{{ $enrollee->email }}</td>
-                        <td>{{ $enrollee->hcp_name }}</td>
+                        <td>{{ $enrollee->hcp->name }}</td>
                         <td>{{ $enrollee->sex }}</td>
                         <td>{{ $enrollee->age }}</td>
                         <td>

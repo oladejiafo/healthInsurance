@@ -14,8 +14,4 @@ class Enrollees extends Model
         return $this->belongsTo(Providers::class);
     }
 
-    public function enrollees()
-{
-    return $this->hasMany(Enrollees::class);
-}
 }
