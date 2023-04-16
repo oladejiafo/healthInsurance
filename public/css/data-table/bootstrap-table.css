@@ -246,7 +246,7 @@
 }
 
 .fixed-table-toolbar .btn-group > .btn-group {
-    display: inline-block;
+    /* display: inline-block; */
     margin-left: -1px !important;
 }
 

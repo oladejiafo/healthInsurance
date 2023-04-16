@@ -31,7 +31,7 @@ class Claims extends Migration
             $table->string('status')->nullable();
 
             $table->text('diagnosis')->nullable();
-            $table->text('diagnosis1')->nullable();
+            $table->text('diagnosis2')->nullable();
             $table->text('diagnosis3')->nullable();
             $table->text('diagnosis4')->nullable();
             $table->text('treatment')->nullable();
@@ -50,7 +50,7 @@ class Claims extends Migration
             $table->date('discharge_date')->nullable();
             $table->date('entry_date')->nullable();
             $table->text('remarks')->nullable();
-            $table->string('creatd_by')->nullable();
+            $table->string('created_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

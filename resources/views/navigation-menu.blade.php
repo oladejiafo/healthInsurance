@@ -43,7 +43,7 @@
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
                 <a class="sidebar-brand brand-logo" href="{{ route('dashboard') }}"><img
                         src="{{ asset('images/logo-plain.png') }}" alt="logo" /></a>
-                <a class="sidebar-brand brand-logo-mini" href="{{ route('dashboard') }}"><img src="assets/images/logo-mini.svg"
+                <a class="sidebar-brand brand-logo-mini" href="{{ route('dashboard') }}"><img src="images/logo-mini.png"
                         alt="logo" /></a>
             </div>
             <ul class="nav">
