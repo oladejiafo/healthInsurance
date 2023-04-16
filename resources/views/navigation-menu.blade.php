@@ -116,11 +116,11 @@
                     </a>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Providers
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('providers') }}"> Providers
                                 </a></li>
                             <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> Clients
                                 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> Enrollees
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('enrollees') }}"> Enrollees
                                 </a></li>
                             <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Provider
                                     Manifest </a></li>

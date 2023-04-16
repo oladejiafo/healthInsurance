@@ -31,3 +31,7 @@ Route::middleware([
 Route::get('/claims', [ClaimsController::class, 'claims'])->name('claims');
 
 Route::get('/claims-summary', [ClaimsController::class, 'claimsSummary'])->name('claimsSummary');
+
+Route::get('/providers', [ClaimsController::class, 'providers'])->name('providers');
+
+Route::get('/enrollees', [ClaimsController::class, 'enrollees'])->name('enrollees');

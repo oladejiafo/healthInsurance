@@ -89,7 +89,6 @@
 <!-- @endsection  -->
 
 @push('scripts')
--->
 <!-- data table JS
       ============================================ -->
 <script src="js/data-table/bootstrap-table.js"></script>
