@@ -37,3 +37,15 @@ Route::get('/providers', [ClaimsController::class, 'providers'])->name('provider
 Route::get('/enrollees', [ClaimsController::class, 'enrollees'])->name('enrollees');
 
 Route::get('/clients', [ClaimsController::class, 'clients'])->name('clients');
+
+Route::get('/tariffs', [ClaimsController::class, 'tariffs'])->name('tariffs');
+
+Route::post('/tariffs/{tariff}', 'App\Http\Controllers\ClaimsController@update')->name('tariffs.update');
+Route::get('/tariffs/edit/{tariff}', 'App\Http\Controllers\ClaimsController@edit')->name('tariffs.edit');
+Route::get('/tariffs/create', 'App\Http\Controllers\ClaimsController@create')->name('tariffs.create');
+Route::post('/tariffs', 'App\Http\Controllers\ClaimsController@store')->name('tariffs.store');
+Route::delete('/tariffs/{tariff}', 'App\Http\Controllers\ClaimsController@destroy')->name('tariffs.destroy');
+Route::get('/tariffs/{tariff}', 'App\Http\Controllers\ClaimsController@show')->name('tariffs.show');
+
+
+

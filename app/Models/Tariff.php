@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Tariff extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'type', 
+        'category', 
+        'name', 
+        'sub_category', 
+        'price', 
+        'provider', 
+        
+
+    ];
 }
