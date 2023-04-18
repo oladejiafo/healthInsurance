@@ -5,6 +5,7 @@ use App\Models\Claims;
 use App\Models\Providers;
 use App\Models\Enrollees;
 use App\Models\Clients;
+use App\Models\Tariff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -82,4 +83,82 @@ class ClaimsController extends Controller
 
         return view('registers.clients', compact('clients'));
     }
+
+    public function tariffs()
+    {
+        $tariffs = Tariff::all();
+
+        return view('registers.tariffs', compact('tariffs'));
+    }
+
+    public function create()
+    {
+        return view('registers.tariffs-create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'type' => 'required',
+            'category' => 'required',
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'provider' => 'required',
+        ]);
+
+        $tariff = new Tariff([
+            'type' => $request->get('type'),
+            'category' => $request->get('category'),
+            'name' => $request->get('name'),
+            'sub_category' => $request->get('sub_category'),
+            'price' => $request->get('price'),
+            'provider' => $request->get('provider'),
+        ]);
+
+        $tariff->save();
+
+        return redirect('/tariffs')->with('success', 'Tariff has been added');
+    }
+
+    public function edit($id)
+    {
+        $tariff = Tariff::find($id);
+        return view('registers.tariffs-edit', compact('tariff'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'type' => 'required',
+            'category' => 'required',
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'provider' => 'required',
+        ]);
+
+        $tariff = Tariff::find($id);
+        $tariff->type = $request->get('type');
+        $tariff->category = $request->get('category');
+        $tariff->name = $request->get('name');
+        $tariff->sub_category = $request->get('sub_category');
+        $tariff->price = $request->get('price');
+        $tariff->provider = $request->get('provider');
+        $tariff->save();
+
+        return redirect('/tariffs')->with('success', 'Tariff has been updated');
+    }
+
+    public function destroy($id)
+    {
+        $tariff = Tariff::find($id);
+        $tariff->delete();
+
+        return redirect('/tariffs')->with('success', 'Tariff has been deleted');
+    }
+
+    public function show(Tariff $tariff)
+    {
+        return view('registers.tariffs-view', compact('tariff'));
+    }
+
 }
