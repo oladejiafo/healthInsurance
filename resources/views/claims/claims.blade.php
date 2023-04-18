@@ -10,57 +10,7 @@
 <link rel="stylesheet" href="css/data-table/bootstrap-table.css">
 <link rel="stylesheet" href="css/data-table/bootstrap-editable.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-
-<style>
-html, body {
-    font-size: 14px !important;
-    color: #000 !important;
-}
-.card-header {
-    font-size: 18px;
-}
-thead, th {
-    color: #000 !important;
-    font-size: 14px !important;
-    padding-left: 5px !important;
-    font-weight: bold !important;
-}
-tbody, td {
-    color: #000 !important;
-    font-size: 13px !important;
-    padding-left: 5px !important;
-}
-
-.dropdown-menu>li>a {
-    color: #fff !important;
-}
-.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
-    color: #000 !important;
-    text-decoration: none;
-    background-color: #fff !important;
-}
-.nav>li>a:focus, .nav>li>a:hover {
-    text-decoration: none;
-    color: #fff;
-    background-color: #0f1015 !important;
-}
-.sidebar .nav .nav-item.active > .nav-link .menu-title {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 700;
-}
-.sidebar .nav.sub-menu .nav-item .nav-link {
-    color: #d6caca;
-    padding: 0.5rem 0.35rem;
-    position: relative;
-    font-size: 0.855rem;
-    line-height: 1;
-    height: auto;
-    border-top: 0;
-    font-weight: 700;
-}
-</style>
+<script src="extensions/resizable/bootstrap-table-resizable.js"></script>
 
 @extends('layouts.app')
 @section('content')

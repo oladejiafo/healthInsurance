@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" href="{{ asset('css/jquery.resizableColumns.css') }}">
 <script src="{{ asset('js/jquery.resizableColumns.min.js') }}"></script>
-
+<script src="extensions/resizable/bootstrap-table-resizable.js"></script>
 
 @extends('layouts.app')
 
