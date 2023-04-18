@@ -6,6 +6,7 @@ use App\Models\Providers;
 use App\Models\Enrollees;
 use App\Models\Clients;
 use App\Models\Tariff;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -20,6 +21,16 @@ class ClaimsController extends Controller
 
     // public function claims_summary(ClaimsSumDataTable $claimsTable){
     //     return $claimsTable->render('claims.claims-summary');
+    // }
+
+
+
+    //$role = Role::create(['name' => 'admin']);
+
+    // usage
+    // $user->assignRole('admin');
+    // if ($user->hasRole('admin')) {
+    //     // do something
     // }
 
     public function claims(Request $request) {
