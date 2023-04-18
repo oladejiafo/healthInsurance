@@ -23,7 +23,7 @@
                 <div class="card-header">{{ __('Tariffs') }}</div>
                 <div class="card-body" style="margin-top: 10px;">
                 <!--  route('tariffs.create')  -->
-                   <a href="{{ route('tariffs.create') }}" class="btn btn-primary">Add Tariff</a>
+                   <a href="{{ route('tariffs.create') }}" class="btn btn-success">Add Tariff</a>
                     <div class="table-responsive">
                       <div id="toolbar">
                         <select class="form-control">

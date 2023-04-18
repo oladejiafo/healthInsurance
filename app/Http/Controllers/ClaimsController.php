@@ -7,6 +7,7 @@ use App\Models\Enrollees;
 use App\Models\Clients;
 use App\Models\Tariff;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -75,41 +76,75 @@ class ClaimsController extends Controller
 
     public function providers()
     {
-        $providers = Providers::all();
-        return view('registers.providers', compact('providers'));
+        if (Auth::id()) {
+           $providers = Providers::all();
+           return view('registers.providers', compact('providers'));
+        } else {
+            return redirect('/');
+        }
+
     }
 
     public function enrollees()
     {
-        // $enrollees = Enrollees::all();
+        if (Auth::id()) {
+              // $enrollees = Enrollees::all();
         $enrollees = Enrollees::with('hcp')->get();
 
-        return view('registers.enrollees', compact('enrollees'));
+        return view('registers.enrollees', compact('enrollees'));      
+        } else {
+            return redirect('/');
+        }
+
     }
 
     public function clients()
     {
-        // $enrollees = Enrollees::all();
+        if (Auth::id()) {
+              // $enrollees = Enrollees::all();
         $clients = Clients::all();
 
-        return view('registers.clients', compact('clients'));
+        return view('registers.clients', compact('clients'));      
+        } else {
+            return redirect('/');
+        }
+
     }
 
     public function tariffs()
     {
-        $tariffs = Tariff::all();
+        $user = auth()->user(); // get the currently authenticated user
+        $role = $user->role; // get the user's Role model
+        $roleName = $role->name; // get the name of the user's role
+       
+        $permissions = $role->permissions; // get the permissions associated with the user's role
+        // do something with the user's role and permissions
+
+        if (Auth::id()) {
+            $tariffs = Tariff::all();
 
         return view('registers.tariffs', compact('tariffs'));
+        } else {
+
+            return redirect('/');
+        }
+
     }
 
     public function create()
     {
-        return view('registers.tariffs-create');
+        if (Auth::id()) {
+                return view('registers.tariffs-create');    
+        } else {
+            return redirect('/');
+        }
+
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        if (Auth::id()) {
+                 $request->validate([
             'type' => 'required',
             'category' => 'required',
             'name' => 'required',
@@ -128,18 +163,28 @@ class ClaimsController extends Controller
 
         $tariff->save();
 
-        return redirect('/tariffs')->with('success', 'Tariff has been added');
+        return redirect('/tariffs')->with('success', 'Tariff has been added');   
+        } else {
+            return redirect('/');
+        }
+
     }
 
     public function edit($id)
     {
-        $tariff = Tariff::find($id);
-        return view('registers.tariffs-edit', compact('tariff'));
+        if (Auth::id()) {
+              $tariff = Tariff::find($id);
+        return view('registers.tariffs-edit', compact('tariff'));      
+        } else {
+            return redirect('/');
+        }
+
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        if (Auth::id()) {
+             $request->validate([
             'type' => 'required',
             'category' => 'required',
             'name' => 'required',
@@ -156,20 +201,36 @@ class ClaimsController extends Controller
         $tariff->provider = $request->get('provider');
         $tariff->save();
 
-        return redirect('/tariffs')->with('success', 'Tariff has been updated');
+        return redirect('/tariffs')->with('success', 'Tariff has been updated');       
+        } else {
+            return redirect('/');
+        }
+
+
     }
 
     public function destroy($id)
     {
-        $tariff = Tariff::find($id);
+        if (Auth::id()) {
+            $tariff = Tariff::find($id);
         $tariff->delete();
 
-        return redirect('/tariffs')->with('success', 'Tariff has been deleted');
+        return redirect('/tariffs')->with('success', 'Tariff has been deleted');        
+        } else {
+            return redirect('/');
+        }
+
+
     }
 
     public function show(Tariff $tariff)
     {
-        return view('registers.tariffs-view', compact('tariff'));
+        if (Auth::id()) {
+             return view('registers.tariffs-view', compact('tariff'));       
+        } else {
+            return redirect('/');
+        }
+
     }
 
 }
