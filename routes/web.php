@@ -28,6 +28,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/users/create', [ClaimsController::class, 'createUser'])->name('createUser');
+Route::post('/users', [ClaimsController::class, 'storeUser'])->name('storeUser');
+Route::get('/users/view', [ClaimsController::class, 'viewUser'])->name('viewUser');
+
 Route::get('/claims', [ClaimsController::class, 'claims'])->name('claims');
 
 Route::get('/claims-summary', [ClaimsController::class, 'claimsSummary'])->name('claimsSummary');

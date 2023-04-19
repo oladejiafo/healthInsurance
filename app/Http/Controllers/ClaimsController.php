@@ -8,6 +8,9 @@ use App\Models\Clients;
 use App\Models\Tariff;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Permission;
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -233,4 +236,53 @@ class ClaimsController extends Controller
 
     }
 
+    public function viewUser()
+    {
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $users = User::all();
+        return view('users.view', compact('roles', 'permissions','users'));
+    }
+    public function createUser()
+    {
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('users.create', compact('roles', 'permissions'));
+    }
+
+    public function storeUser(Request $request)
+    {
+       
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'role_id' => 'required|exists:roles,id',
+            'permissions' => 'nullable|array',
+            'permissions.*' => 'exists:permissions,id'
+        ]);
+        // dd($request->all(),$request['role']);
+        try {
+            $user = User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+                'role_id' => $request['role_id']
+            ]);
+        } catch (\Throwable $e) {
+            dd($e);
+            // return redirect()->route('/')->with('success', 'User created successfully');
+            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to create user: '.$e->getMessage()]);
+        }
+    
+        if (isset($validatedData['permissions'])) {
+            $user->permissions()->attach($validatedData['permissions']);
+        }
+    
+        if (!$user) {
+            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to create user']);
+        }
+
+        return redirect()->route('dashboard')->with('success', 'User created successfully');
+    }
 }

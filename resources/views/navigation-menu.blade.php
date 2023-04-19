@@ -187,6 +187,14 @@
                         <span class="menu-title">Messaging</span>
                     </a>
                 </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ route('viewUser') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-chart-bar"></i>
+                        </span>
+                        <span class="menu-title">Users</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- partial -->
