@@ -3,7 +3,59 @@ use App\Models\Providers;
 use App\Models\Enrollees;
 use App\Models\Claims;
 use App\Models\Clients;
+use App\Models\Authorization;
 use Carbon\Carbon;
+
+//$premiums = DB::table('premiums')
+ //   ->select('cliam_id', 'id', 'provider_id', 'amount')
+ //   ->distinct()
+ //   ->orderByDesc('id')
+ //   ->get();
+    
+$exhu = 0;
+
+//foreach ($premiums as $premium) {
+    //$pcc = $premium['claim_id'];
+    //$pid = $premium['id'];
+   // $pcnm = $premium['provider_id];
+   // $pcam = $premium['amount'];
+    
+  //  $client = Clients::where('code', $pcc)->first();
+ //   $djEX = $client['date_oined'];
+//    $deEX = $client['date_exited'];
+    
+//    $bills = Bill::where('Company', 'like', $cnm . '%')
+ //       ->whereBetween('Date of Pay', [$djEX, $deEX])
+  //      ->select(DB::raw('SUM(`Amount Paid`) as PA, COUNT(`ID`) as CN'))
+   //     ->first();
+  //  $pexhh = $bills['PA'];
+  //  $pdiff = $pcam - $pexhh;
+  //  $pqtz = $pcam / 4;
+  //  if ($pdiff <= $pqtz) {
+  //      $exhu = $exhu + 1;
+    //}
+//}
+
+
+$bill = Claims::where('status', 'Pending')->distinct('id')->count();
+$auth = DB::table('authorization')->where('status', '=', 'Pending')->distinct('id')->count('id');
+$comp = DB::table('complaints')
+        ->select(DB::raw('count(distinct id) as cntX1'))
+        ->where('status', '=', 'Pending')
+        ->value('cntX1');
+
+if (!$bill) {
+    $bill = 0;
+}
+
+$ndate = date('Y-m-d', strtotime('+89 day'));
+$exhuA = DB::table('clients')
+    ->where('date_exited', '<=', $ndate)
+    ->count();
+
+$tm = date('m');
+$td = date('d');
+$exhuB = DB::table('enrollees')->whereMonth('DoB', $tm)->whereDay('DoB', $td)->where('status', 'Active')->count();
 
 $currentMonth = Carbon::now()->format('F');
 $currentYear = Carbon::now()->year;
@@ -178,15 +230,19 @@ $encl = Claims::where('status', 'in', ['Unvetted', 'Pending', 'Vetted', 'Paid', 
         .dash .card-header {
             padding: 0.35rem 1.05rem !important;
         }
-        .table-grey {
-    border: 1px solid #dddddd;
-}
 
-.table-grey th,
-.table-grey td {
-    border: 1px solid #dddddd;
-}
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            height: 80px;
+            /* set the maximum height of the table */
+        }
 
+        .table {
+            width: calc(100% - 1.2em);
+            margin-left: 0.6em;
+            margin-bottom: 1.6em;
+        }
     </style>
     <script type='text/javascript'>
         var jstatearray = <?php echo json_encode($locations); ?>;
@@ -317,6 +373,29 @@ $encl = Claims::where('status', 'in', ['Unvetted', 'Pending', 'Vetted', 'Paid', 
                 </div>
             </div>
 
+            <div class="row grid-margin" style="margin-left: 10px;margin-right: 10px">
+                <div class="col-4 card px-4" style="color: #ff0000; border-radius: 25px;height:50px;padding:10px;margin:0 auto;">
+                    {{$bill}} Pending Claims requests
+                </div>
+                <div class="col-4 card px-4" style="color: #ff0000; border-radius: 25px;height:50px;padding:10px;margin:0 auto;">
+                    {{ $auth}} Pending Auth. Code
+                </div>
+                <div class="col-4 card px-4" style="color: #ff0000; border-radius: 25px;height:50px;padding:10px;margin:0 auto;">
+                    {{$comp}} Pending Complaints
+                </div>
+            </div>
+            <div class="row grid-margin" style="margin-left: 10px;margin-right: 10px">
+                <div class="col-4 card px-4" style="color: #ff0000; border-radius: 25px;height:50px;padding:10px;margin:0 auto;">
+                    {{$exhu}} Premiums Expiring
+                </div>
+                <div class="col-4 card px-4" style="color: #ff0000; border-radius: 25px;height:50px;padding:10px;margin:0 auto;">
+                    {{$exhuA}} Contract Expiring
+                </div>
+                <div class="col-4 card px-4" style="color: #ff0000; border-radius: 25px;height:50px;padding:10px;margin:0 auto;">
+                    {{$exhuB}} Enrollee Birthdays
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-6 grid-margin">
                     <div class="card">
@@ -324,10 +403,11 @@ $encl = Claims::where('status', 'in', ['Unvetted', 'Pending', 'Vetted', 'Paid', 
                             <span class="card-title" style="color:#000;">Claims Analysis</span>
                         </div>
                         <div class="card-body">
-                                <table class="table table-bordered table-condensed table-grey table-responsive">
+                            <div class="table-responsive" style="overflow-x: auto;">
+                                <table class="table table-hover" style="min-width: 500px;">
                                     <thead>
                                         <tr>
-                                            <th> Visits </th> 
+                                            <th> Visits </th>
                                             <th> Enrollees </th>
                                             <th> Unvetted Amt </th>
                                             <th> Vetted Amt </th>
@@ -345,6 +425,7 @@ $encl = Claims::where('status', 'in', ['Unvetted', 'Pending', 'Vetted', 'Paid', 
 
                                     </tbody>
                                 </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -354,8 +435,8 @@ $encl = Claims::where('status', 'in', ['Unvetted', 'Pending', 'Vetted', 'Paid', 
                             <span class="card-title" style="color:#000;">Summary of Visits</span>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
+                            <div class="table-responsive" style="overflow-x: auto;">
+                                <table class="table table-hover" style="min-width: 700px;">
                                     <thead>
                                         <tr>
                                             <th>Primary Health Care</th>
