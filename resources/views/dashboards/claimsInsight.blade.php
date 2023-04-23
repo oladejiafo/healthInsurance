@@ -541,11 +541,11 @@ $exhuA = DB::table('clients')
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>{{ number_format($enc) }}</td>
-                                                <td>{{ number_format($patPP) }}</td>
-                                                <td>{{ number_format($uvcl,2) }}</td>
-                                                <td>{{ number_format($vcl,2) }}</td>
-                                                <td>{{ number_format($prov) }}</td>
+                                                <td><font style="font-size:12px">{{ number_format($enc) }}</font></td>
+                                                <td><font style="font-size:12px">{{ number_format($patPP) }}</font></td>
+                                                <td><font style="font-size:12px">{{ number_format($uvcl,2) }}</font></td>
+                                                <td><font style="font-size:12px">{{ number_format($vcl,2) }}</font></td>
+                                                <td><font style="font-size:12px">{{ number_format($prov) }}</font></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -572,18 +572,18 @@ $exhuA = DB::table('clients')
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>{{ number_format($phc_n) }}</td>
-                                                <td>{{ number_format($adm_n) }}</td>
-                                                <td>{{ number_format($sur_n) }}</td>
-                                                <td>{{ number_format($opt_n) }}</td>
-                                                <td>{{ number_format($den_n) }}</td>
+                                                <td><font style="font-size:12px">{{ number_format($phc_n) }}</font></td>
+                                                <td><font style="font-size:12px">{{ number_format($adm_n) }}</font></td>
+                                                <td><font style="font-size:12px">{{ number_format($sur_n) }}</font></td>
+                                                <td><font style="font-size:12px">{{ number_format($opt_n) }}</font></td>
+                                                <td><font style="font-size:12px">{{ number_format($den_n) }}</font></td>
                                             </tr>
                                             <tr>
-                                                <td style="background-color:#FFE4E1">{{ number_format($phc_n) }}</td>
-                                                <td style="background-color:#FFE4E1">{{ number_format($adm_n) }}</td>
-                                                <td style="background-color:#FFE4E1">{{ number_format($sur_n) }}</td>
-                                                <td style="background-color:#FFE4E1">{{ number_format($opt_n) }}</td>
-                                                <td style="background-color:#FFE4E1">{{ number_format($den_n) }}</td>
+                                                <td style="background-color:#FFE4E1"><font style="font-size:12px">{{ number_format($phc_n) }}</font></td>
+                                                <td style="background-color:#FFE4E1"><font style="font-size:12px">{{ number_format($adm_n) }}</font></td>
+                                                <td style="background-color:#FFE4E1"><font style="font-size:12px">{{ number_format($sur_n) }}</font></td>
+                                                <td style="background-color:#FFE4E1"><font style="font-size:12px">{{ number_format($opt_n) }}</font></td>
+                                                <td style="background-color:#FFE4E1"><font style="font-size:12px">{{ number_format($den_n) }}</font></td>
                                             </tr>
                                         </tbody>
                                     </table>
