@@ -39,11 +39,31 @@
 </head>
 
 <body>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+    <a href="{{ route('logout') }}" @click.prevent="$root.submit();">
+</form>
 @auth
     @php
+session_start();
+
+    $usr = Auth::user();
+    $lastActivity = session('lastActivityTime', 0);
+    $timeoutMinutes = 10;
+    $timeoutSeconds = $timeoutMinutes * 60;
+    $now = time();
+
+    if ($usr && ($now - $lastActivity) > $timeoutSeconds) {
+
+    } else {
+        session(['lastActivityTime' => $now]);
+    }
+
         $user = auth()->user();
         $role = $user->role;
     @endphp
+
+
     <div class="container-scroller">
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -96,22 +116,22 @@
                 </li> -->
 
                 <li class="nav-item menu-items">
-                    <a class="nav-link" data-toggle="collapse" href="#dashboard" aria-expanded="false"
-                        aria-controls="claims">
+                    <a class="nav-link" data-toggle="collapse" href="#dashboard" aria-expanded="true"
+                        aria-controls="dashboard">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer" style="color:#fff;"></i>
                         </span>
-                        <span class="menu-title">Dashboard</span>
+                        <span class="menu-title">Dashboards</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="claims">
+                    <div class="collapse" id="dashboard">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ route('dashboard') }}"> Basic Insights</a></li>
                             @if ($role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='cfo')
-                            <li class="nav-item"> <a class="nav-link" href="#"> Claims Insights</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('claimsDashboard') }}"> Claims Insights</a></li>
                             @endif
                             @if ($role->slug =='medical_head' || $role->slug =='underwriting_head' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='claim_officer')
-                            <li class="nav-item"> <a class="nav-link" href="#"> Providers Insights</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('providersDashboard') }}"> Providers Insights</a></li>
                             @endif
                             @if ($role->slug =='underwriting_head' || $role->slug =='client_relation' || $role->slug =='admin' || $role->slug =='super_admin')
                             <li class="nav-item"> <a class="nav-link" href="#"> Enrollment Insights</a></li>

@@ -28,6 +28,9 @@ Route::middleware([
     })->name('dashboard');
 });
 
+//Insights
+Route::get('/dashboards/claims', [ClaimsController::class, 'claimsDashboard'])->name('claimsDashboard');
+Route::get('/dashboards/providers', [ClaimsController::class, 'providersDashboard'])->name('providersDashboard');
 
 Route::get('/users/create', [ClaimsController::class, 'createUser'])->name('createUser');
 Route::post('/users', [ClaimsController::class, 'storeUser'])->name('storeUser');

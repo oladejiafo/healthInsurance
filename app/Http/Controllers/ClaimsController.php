@@ -71,6 +71,23 @@ class ClaimsController extends Controller
         }
     }
 
+    
+    public function claimsDashboard(){
+        if (Auth::id()) {
+            
+            return view('dashboards.claimsinsight');
+        } else {
+            return redirect('/');
+        }
+    }    
+    public function providersDashboard(){
+        if (Auth::id()) {
+            return view('dashboards.providersinsight');
+        } else {
+            return redirect('/');
+        }
+    }    
+
     public function providers()
     {
         if (Auth::id()) {
