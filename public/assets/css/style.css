@@ -17825,8 +17825,14 @@ div.tagsinput {
   align-items: center;
   justify-content: center; }
   .icon.icon-box-success {
+<<<<<<< HEAD
     width: 40px;
     height: 37px;
+=======
+    width: 25px;
+    height: 30px;
+    margin-left: 10px;
+>>>>>>> dd50a8cc4b57b2c8118c37dc37723179b8010bcf
     background: rgba(0, 210, 91, 0.11);
     border-radius: 7px;
     color: #00d25b; }
@@ -17864,8 +17870,14 @@ div.tagsinput {
   align-items: center;
   justify-content: center; }
   .icon.icon-box-danger {
+<<<<<<< HEAD
     width: 40px;
     height: 37px;
+=======
+    width: 25px;
+    height: 30px;
+    margin-left: 10px;
+>>>>>>> dd50a8cc4b57b2c8118c37dc37723179b8010bcf
     background: rgba(252, 66, 74, 0.11);
     border-radius: 7px;
     color: #fc424a; }
@@ -20764,7 +20776,7 @@ div.tagsinput {
           content: "";
           width: 3px;
           height: 100%;
-          background: #0090e7;
+          background: #c3a469;
           display: inline-block;
           position: absolute;
           left: 0;
@@ -20823,8 +20835,9 @@ div.tagsinput {
               margin-left: 0;
               margin-right: 1rem; }
             .sidebar .nav .nav-item.profile .profile-desc .profile-name span {
-              font-size: 12px;
-              color: #fff;
+              font-size: 11px;
+              font-weight: 700;
+              color: #c3a469; /*#fff;*/
               white-space: nowrap; }
             .sidebar .nav .nav-item.profile .profile-desc .profile-name h5 {
               white-space: nowrap; }

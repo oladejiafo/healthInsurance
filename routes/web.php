@@ -28,6 +28,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
+//Insights
+Route::get('/dashboards/claims', [ClaimsController::class, 'claimsDashboard'])->name('claimsDashboard');
+Route::get('/dashboards/providers', [ClaimsController::class, 'providersDashboard'])->name('providersDashboard');
+
 Route::get('/users/create', [ClaimsController::class, 'createUser'])->name('createUser');
 Route::post('/users', [ClaimsController::class, 'storeUser'])->name('storeUser');
 Route::get('/users/view', [ClaimsController::class, 'viewUser'])->name('viewUser');
@@ -51,16 +55,3 @@ Route::post('/tariffs', 'App\Http\Controllers\ClaimsController@store')->name('ta
 Route::delete('/tariffs/{tariff}', 'App\Http\Controllers\ClaimsController@destroy')->name('tariffs.destroy');
 Route::get('/tariffs/{tariff}', 'App\Http\Controllers\ClaimsController@show')->name('tariffs.show');
 
-
-// Route::get('/dashboard', 'DashboardController@index')
-//     ->middleware('check-permissions:manage-products,manage-orders');
-
-// Route::middleware(['auth', 'permission:manage-products'])->group(function () {
-//     Route::get('/products', 'ProductController@index')->name('products.index');
-//     Route::get('/products/create', 'ProductController@create')->name('products.create');
-//     Route::post('/products', 'ProductController@store')->name('products.store');
-//     Route::get('/products/{id}', 'ProductController@show')->name('products.show');
-//     Route::get('/products/{id}/edit', 'ProductController@edit')->name('products.edit');
-//     Route::put('/products/{id}', 'ProductController@update')->name('products.update');
-//     Route::delete('/products/{id}', 'ProductController@destroy')->name('products.destroy');
-// });

@@ -23,13 +23,15 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
 
     <style>
         .mdi {
             color: #000;
         }
-
+        .text-info {
+        color: #db190b !important;
+    }
         body {
             width: 100%;
         }
@@ -37,6 +39,31 @@
 </head>
 
 <body>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+    <a href="{{ route('logout') }}" @click.prevent="$root.submit();">
+</form>
+@auth
+    @php
+session_start();
+
+    $usr = Auth::user();
+    $lastActivity = session('lastActivityTime', 0);
+    $timeoutMinutes = 10;
+    $timeoutSeconds = $timeoutMinutes * 60;
+    $now = time();
+
+    if ($usr && ($now - $lastActivity) > $timeoutSeconds) {
+
+    } else {
+        session(['lastActivityTime' => $now]);
+    }
+
+        $user = auth()->user();
+        $role = $user->role;
+    @endphp
+
+
     <div class="container-scroller">
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -56,7 +83,7 @@
                             </div>
                             <div class="profile-name">
                                 <h5 class="mb-0 font-weight-normal" style="color:#fff">{{ Auth::user()->name }}</h5>
-                                {{-- <span>{{ Auth::user()->role }}</span> --}}
+                                <span>{{ $role->name }}</span>
                             </div>
                         </div>
                         <a href="#" id="profile-dropdown" data-toggle="dropdown"><i
@@ -79,24 +106,60 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item menu-items">
+                <!-- <li class="nav-item menu-items">
                     <a class="nav-link" href="{{ route('dashboard') }}">
                         <span class="menu-icon">
-                            <i class="mdi mdi-speedometer"></i>
+                            <i class="mdi mdi-speedometer" style="color:#fff;"></i>
                         </span>
                         <span class="menu-title">Dashboard</span>
                     </a>
-                </li>
+                </li> -->
+
                 <li class="nav-item menu-items">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                        aria-controls="ui-basic">
+                    <a class="nav-link" data-toggle="collapse" href="#dashboard" aria-expanded="true"
+                        aria-controls="dashboard">
                         <span class="menu-icon">
-                            <i class="mdi mdi-laptop"></i>
+                            <i class="mdi mdi-speedometer" style="color:#fff;"></i>
+                        </span>
+                        <span class="menu-title">Dashboards</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="dashboard">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('dashboard') }}"> Basic Insights</a></li>
+                            @if ($role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='cfo')
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('claimsDashboard') }}"> Claims Insights</a></li>
+                            @endif
+                            @if ($role->slug =='medical_head' || $role->slug =='underwriting_head' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='claim_officer')
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('providersDashboard') }}"> Providers Insights</a></li>
+                            @endif
+                            @if ($role->slug =='underwriting_head' || $role->slug =='client_relation' || $role->slug =='admin' || $role->slug =='super_admin')
+                            <li class="nav-item"> <a class="nav-link" href="#"> Enrollment Insights</a></li>
+                            @endif
+                            @if ($role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='cfo')
+                            <li class="nav-item"> <a class="nav-link" href="#"> Financial Insights</a></li>
+                            @endif
+                            @if ($role->slug =='medical_head' || $role->slug =='underwriting_head' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='cfo')
+                            <li class="nav-item"> <a class="nav-link" href="#"> Utilization Insights</a></li>
+                            @endif
+                            @if ($role->slug =='medical_head' || $role->slug =='underwriting_head' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='cfo')
+                            <li class="nav-item"> <a class="nav-link" href="#"> Operational Insights</a></li>
+                            @endif
+                        </ul>
+                    </div>
+                </li>
+
+                @if ($role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='claim_officer' || $role->slug =='cfo')
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-toggle="collapse" href="#claims" aria-expanded="false"
+                        aria-controls="claims">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-recycle" style="color:#fff;"></i>
                         </span>
                         <span class="menu-title">Claims</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="ui-basic">
+                    <div class="collapse" id="claims">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="#">Add New Claim</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('claimsSummary') }}">Manage
@@ -105,16 +168,21 @@
                         </ul>
                     </div>
                 </li>
+
+                @endif
+                
+                @if ($role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='underwriting_head' || $role->slug =='claim_officer' || $role->slug =='client_relation' || $role->slug =='client_management' || $role->slug =='enrollment_officer')
+
                 <li class="nav-item menu-items">
-                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
-                        aria-controls="auth">
+                    <a class="nav-link" data-toggle="collapse" href="#registers" aria-expanded="false"
+                        aria-controls="registers">
                         <span class="menu-icon">
-                            <i class="mdi mdi-security"></i>
+                            <i class="mdi mdi-file-document-box" style="color:#fff;"></i>
                         </span>
                         <span class="menu-title">Registers</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="auth">
+                    <div class="collapse" id="registers">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ route('providers') }}"> Providers
                                 </a></li>
@@ -129,72 +197,120 @@
                         </ul>
                     </div>
                 </li>
+                @endif
+                
+                @if ($role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='underwriting_head' || $role->slug =='claim_officer' || $role->slug =='client_relation' || $role->slug =='client_management' || $role->slug =='enrollment_officer')
                 <li class="nav-item menu-items">
-                    <a class="nav-link" data-toggle="collapse" href="#authx" aria-expanded="false"
-                        aria-controls="auth">
+                    <a class="nav-link" data-toggle="collapse" href="#requests" aria-expanded="false"
+                        aria-controls="requests">
                         <span class="menu-icon">
-                            <i class="mdi mdi-security"></i>
+                            <i class="mdi mdi-repeat" style="color:#fff;"></i>
                         </span>
                         <span class="menu-title">Request</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="authx">
+                    <div class="collapse" id="requests">
                         <ul class="nav flex-column sub-menu">
+                        @if ($role->slug !='enrollment_officer' && $role->slug !='client_management' && $role->slug !='client_relation')
                             <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Claims
                                     Request </a></li>
+                        @endif
+                
+                        @if ($role->slug !='enrollment_officer' && $role->slug !='client_management' && $role->slug !='underwriting_head' && $role->slug !='client_relation')
                             <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html">
                                     Authorization Codes </a></li>
+                        @endif
+                
+                        @if ($role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='underwriting_head' || $role->slug =='claim_officer' || $role->slug =='client_relation')
                             <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> Complaints
                                 </a></li>
+                        @endif
+                
+                        @if ($role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='underwriting_head' )        
                             <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Enrollee
                                     Applications </a></li>
+                        @endif
+                
+                        @if ($role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='underwriting_head' || $role->slug =='client_relation')        
                             <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Clients
                                     Requests </a></li>
+                        @endif
                         </ul>
                     </div>
                 </li>
+                @endif
+                
+                @if ($role->slug =='cfo' || $role->slug =='accountant' || $role->slug =='super_admin' || $role->slug =='enrollment_officer')
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="pages/forms/basic_elements.html">
                         <span class="menu-icon">
-                            <i class="mdi mdi-playlist-play"></i>
+                            <i class="mdi mdi-receipt" style="color:#fff;"></i>
                         </span>
                         <span class="menu-title">Accounts</span>
                     </a>
                 </li>
+                @endif
+                
+                @if ($role->slug =='cfo' || $role->slug =='accountant' || $role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='underwriting_head' || $role->slug =='claim_officer')
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="{{ route('tariffs') }}">
                         <span class="menu-icon">
-                            <i class="mdi mdi-playlist-play"></i>
+                            <i class="mdi mdi-library" style="color:#fff;"></i>
                         </span>
                         <span class="menu-title">Tariff</span>
                     </a>
                 </li>
+                @endif
+                
+                @if ($role->slug =='cfo' || $role->slug =='accountant' || $role->slug =='medical_head' || $role->slug =='hmo_supervisor' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='underwriting_head')
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="pages/charts/chartjs.html">
                         <span class="menu-icon">
-                            <i class="mdi mdi-chart-bar"></i>
+                            <i class="mdi mdi-chart-bar" style="color:#fff;"></i>
                         </span>
                         <span class="menu-title">Reports</span>
                     </a>
                 </li>
+                @endif
 
+                @if ($role->slug =='client_management' || $role->slug =='enrollment_officer' || $role->slug =='client_relation' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='underwriting_head')
                 <li class="nav-item menu-items">
                     <a class="nav-link"
                         href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
                         <span class="menu-icon">
-                            <i class="mdi mdi-file-document-box"></i>
+                            <i class="mdi mdi-message-processing" style="color:#fff;"></i>
                         </span>
                         <span class="menu-title">Messaging</span>
                     </a>
                 </li>
+
+                @endif
+
+                @if ($role->slug =='cfo' || $role->slug =='admin' || $role->slug =='super_admin' || $role->slug =='medical_head')
+ 
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ route('viewUser') }}">
+                    <a class="nav-link" data-toggle="collapse" href="#cpanel" aria-expanded="false"
+                        aria-controls="cpanel">
                         <span class="menu-icon">
-                            <i class="mdi mdi-chart-bar"></i>
+                            <i class="mdi mdi-server-security" style="color:#fff;"></i>
                         </span>
-                        <span class="menu-title">Users</span>
+                        <span class="menu-title">Control Panel</span>
+                        <i class="menu-arrow"></i>
                     </a>
+                    <div class="collapse" id="cpanel">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('viewUser') }}"> Manage Users </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html">
+                                    Settings </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> Logs
+                                </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Backup & Restore </a></li>
+                            
+                        </ul>
+                    </div>
                 </li>
+
+                @endif
             </ul>
         </nav>
         <!-- partial -->
@@ -373,30 +489,8 @@
                 </div>
             </nav>
             
-        {{-- </div>
-    </div> --}}
+@endauth
 
-            <!-- container-scroller -->
-            <!-- plugins:js -->
-            <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
-            <!-- endinject -->
-            <!-- Plugin js for this page -->
-            <script src="{{ asset('assets/vendors/chart.js/Chart.min.js') }}"></script>
-            <script src="{{ asset('assets/vendors/progressbar.js/progressbar.min.js') }}"></script>
-            <script src="{{ asset('assets/vendors/jvectormap/jquery-jvectormap.min.js') }}"></script>
-            <script src="{{ asset('assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-            <script src="{{ asset('assets/vendors/owl-carousel-2/owl.carousel.min.js') }}"></script>
-            <!-- End plugin js for this page -->
-            <!-- inject:js -->
-            <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
-            <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
-            <script src="{{ asset('assets/js/misc.js') }}"></script>
-            <script src="{{ asset('assets/js/settings.js') }}"></script>
-            <script src="{{ asset('assets/js/todolist.js') }}"></script>
-            <!-- endinject -->
-            <!-- Custom js for this page -->
-            <script src="{{ asset('assets/js/dashboard.js') }}"></script>
-            <!-- End custom js for this page -->
 </body>
 
 </html>

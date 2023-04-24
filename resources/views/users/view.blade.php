@@ -1,7 +1,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <link rel="stylesheet" href="{{ asset('css/claims.css')}}">
-<!-- <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"> -->
+<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'>
 <!-- normalize CSS
   ============================================ -->
