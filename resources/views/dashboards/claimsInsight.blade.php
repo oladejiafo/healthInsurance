@@ -1289,8 +1289,8 @@ $exhuA = DB::table('clients')
 
                                             // Get the total claim_amount for each type of healthcare plan
                                             $primaryClaims = DB::table('claims')
-                                            ->join('providers', 'claims.hcp_code', '=', 'providers.code')
-                                            ->join('enrollees', 'claims.enrollee_code', '=', 'enrollees.code')
+                                            ->join('providers', 'claims.hcp_id', '=', 'providers.id')
+                                            ->join('enrollees', 'claims.enrollee_id', '=', 'enrollees.id')
                                             ->whereIn('claims.status', ['Unvetted', 'Pending', 'Vetted', 'Paid', 'Approved'])
                                             ->where('claims.month', $thisMonth)
                                             ->where('claims.year', $thisYear)
@@ -1299,8 +1299,8 @@ $exhuA = DB::table('clients')
                                             ->sum('claim_amount');
 
                                             $secondaryClaims = DB::table('claims')
-                                            ->join('providers', 'claims.hcp_code', '=', 'providers.code')
-                                            ->join('enrollees', 'claims.enrollee_code', '=', 'enrollees.code')
+                                            ->join('providers', 'claims.hcp_id', '=', 'providers.id')
+                                            ->join('enrollees', 'claims.enrollee_id', '=', 'enrollees.id')
                                             ->whereIn('claims.status', ['Unvetted', 'Pending', 'Vetted', 'Paid', 'Approved'])
                                             ->where('claims.month', $thisMonth)
                                             ->where('claims.year', $thisYear)
@@ -1309,8 +1309,8 @@ $exhuA = DB::table('clients')
                                             ->sum('claim_amount');
 
                                             $tertiaryClaims = DB::table('claims')
-                                            ->join('providers', 'claims.hcp_code', '=', 'providers.code')
-                                            ->join('enrollees', 'claims.enrollee_code', '=', 'enrollees.code')
+                                            ->join('providers', 'claims.hcp_id', '=', 'providers.id')
+                                            ->join('enrollees', 'claims.enrollee_id', '=', 'enrollees.id')
                                             ->whereIn('claims.status', ['Unvetted', 'Pending', 'Vetted', 'Paid', 'Approved'])
                                             ->where('claims.month', $thisMonth)
                                             ->where('claims.year', $thisYear)

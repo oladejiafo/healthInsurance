@@ -15,12 +15,23 @@ class Claims extends Migration
     {
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
-            $table->string('hcp_code')->nullable();
-            $table->string('hcp_name')->nullable();
-            $table->string('enrollee_code')->nullable();
-            $table->string('enrollee_name')->nullable();
-            $table->string('enrollee_phone')->nullable();
-            $table->text('enrollee_address')->nullable();
+            // $table->string('hcp_code')->nullable();
+            // $table->string('hcp_name')->nullable();
+            // $table->string('enrollee_code')->nullable();
+            // $table->string('enrollee_name')->nullable();
+            // $table->string('enrollee_phone')->nullable();
+            // $table->text('enrollee_address')->nullable();
+
+            $table->foreignId('hcp_id')
+            ->constrained('providers')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreignId('enrollee_id')
+            ->constrained('enrollees')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
             $table->date('pay_date')->nullable();
             $table->string('authorization_code')->nullable();
             
