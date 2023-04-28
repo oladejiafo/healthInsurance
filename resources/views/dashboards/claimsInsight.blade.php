@@ -635,15 +635,15 @@ $exhuA = DB::table('clients')
                                         <tbody>
 
                                             @php
-                                            $thismonth = date('m');
-                                            $thisyear = date('Y');
+                                            $thisMonth = date('F');
+                                            $thisYear = date('Y');
 
                                             // Sum of claims paid_amount for the current month and year
                                             $claimsPaidThismonth = DB::table('claims')
                                             ->selectRaw('SUM(paid_amount) as BAt')
                                             ->where('status', 'Paid')
-                                            ->where('month', $thismonth)
-                                            ->where('year', $thisyear)
+                                            ->where('month', $thisMonth)
+                                            ->where('year', $thisYear)
                                             ->first()->BAt;
 
                                             // Sum of claims paid_amount in the last year
@@ -670,8 +670,8 @@ $exhuA = DB::table('clients')
                                             ->selectRaw('SUM(paid_amount) as BA')
                                             ->join('enrollees', 'claims.enrollee_code', '=', 'enrollees.code')
                                             ->where('claims.status', 'Paid')
-                                            ->where('claims.month', $thismonth)
-                                            ->where('claims.year', $thisyear)
+                                            ->where('claims.month', $thisMonth)
+                                            ->where('claims.year', $thisYear)
                                             ->where('enrollees.plan', $plan->id)
                                             ->groupBy('enrollees.plan')
                                             ->first();
@@ -776,15 +776,15 @@ $exhuA = DB::table('clients')
                                         </thead>
                                         <tbody>
                                             @php
-                                            $thismonth = date('m');
-                                            $thisyear = date('Y');
+                                            $thisMonth = date('F');
+                                            $thisYear = date('Y');
 
                                             // Sum of claims paid_amount for the current month and year
                                             $claimsPaidThismonth = DB::table('claims')
                                             ->selectRaw('SUM(paid_amount) as BAt')
                                             ->whereIn('status', ['Paid','Pending','Vetted','Approved'])
-                                            ->where('month', $thismonth)
-                                            ->where('year', $thisyear)
+                                            ->where('month', $thisMonth)
+                                            ->where('year', $thisYear)
                                             ->where('authorized_service', 'Admission' )
                                             ->first()->BAt;
 
@@ -813,8 +813,8 @@ $exhuA = DB::table('clients')
                                             ->selectRaw('SUM(paid_amount) as BA')
                                             ->join('enrollees', 'claims.enrollee_code', '=', 'enrollees.code')
                                             ->whereIn('claims.status', ['Paid','Pending','Vetted','Approved'])
-                                            ->where('claims.month', $thismonth)
-                                            ->where('claims.year', $thisyear)
+                                            ->where('claims.month', $thisMonth)
+                                            ->where('claims.year', $thisYear)
                                             ->where('enrollees.plan', $plan->id)
                                             ->where('authorized_service', 'Admission' )
                                             ->groupBy('enrollees.plan')
@@ -1170,7 +1170,7 @@ $exhuA = DB::table('clients')
                                             @php
 
                                             // Get current month and year
-                                            $thisMonth = date('m');
+                                            $thisMonth = date('F');
                                             $thisYear = date('Y');
 
                                             // Get total claim_amount for Dental claims for current month and year
@@ -1270,8 +1270,8 @@ $exhuA = DB::table('clients')
                                         </thead>
                                         <tbody>
                                             @php
-                                            $thismonth = date('m');
-                                            $thisyear = date('Y');
+                                            $thisMonth = date('F');
+                                            $thisYear = date('Y');
 
                                             // Fetching all the plans
                                             $plans = DB::table('plans')
@@ -1319,9 +1319,9 @@ $exhuA = DB::table('clients')
                                             ->sum('claim_amount');
 
                                             // Set default values if there are no claims for each type of healthcare plan
-                                            $clHPx = $primaryClaims > 0 ? $primaryClaims : 4;
-                                            $clHSx = $secondaryClaims > 0 ? $secondaryClaims : 8;
-                                            $clHTx = $tertiaryClaims > 0 ? $tertiaryClaims : 16;
+                                            $clHPx = $primaryClaims > 0 ? $primaryClaims : 0;
+                                            $clHSx = $secondaryClaims > 0 ? $secondaryClaims : 0;
+                                            $clHTx = $tertiaryClaims > 0 ? $tertiaryClaims : 0;
 
                                             @endphp
 

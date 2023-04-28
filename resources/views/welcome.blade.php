@@ -7,7 +7,7 @@
 
     @if(Route::has('login'))
     @auth
-    <script>window.location = "/dashboard";</script>
+    <script>window.location = "/basicInsight";</script>
     @else
      @include('auth.login')  
     @endauth

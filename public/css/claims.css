@@ -76,6 +76,7 @@ td {
     color: #0f1015 !important;
     position: relative;
     padding: 10px 20px;
+    font-size: 14px;
     margin-right: -10px;
     clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
     z-index: 3;
