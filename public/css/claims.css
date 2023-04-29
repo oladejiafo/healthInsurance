@@ -43,7 +43,7 @@ td {
 
 .sidebar .nav .nav-item.active>.nav-link .menu-title {
     color: #ffffff;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
 }
 
@@ -51,7 +51,7 @@ td {
     color: #d6caca;
     padding: 0.5rem 0.35rem;
     position: relative;
-    font-size: 0.855rem;
+    /* font-size: 0.855rem; */
     line-height: 1;
     height: auto;
     border-top: 0;

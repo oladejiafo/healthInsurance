@@ -35,6 +35,13 @@
         body {
             width: 100%;
         }
+
+        .sidebar .nav.sub-menu .nav-item .nav-link {
+            font-size: 13px !important;
+        }
+        .sidebar .nav .nav-item .nav-link .menu-title {
+            font-size: 15px !important;
+        }
     </style>
 </head>
 
@@ -161,7 +168,7 @@ session_start();
                     </a>
                     <div class="collapse" id="claims">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="#">Add New Claim</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('createClaims') }}">Add New Claim</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('claimsSummary') }}">Manage
                                     Claims</a></li>
                             <li class="nav-item"> <a class="nav-link" href="#">Capitation</a></li>

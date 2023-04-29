@@ -53,7 +53,7 @@
                                         <td>{{ $tariff->category }}</td>
                                         <td>{{ $tariff->name }}</td>
                                         <td>{{ $tariff->sub_category }}</td>
-                                        <td>{{ $tariff->price }}</td>
+                                        <td>{{ number_format($tariff->price,2) }}</td>
                                         <td>{{ $tariff->provider }}</td>
                                         <td>{{ $tariff->created_at }}</td>
                                         <td>{{ $tariff->updated_at }}</td>

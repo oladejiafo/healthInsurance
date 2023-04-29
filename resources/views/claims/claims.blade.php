@@ -19,6 +19,7 @@
         <div class="card" style="margin-top: 100px;">
             <div class="card-header">Claims Management</div>
             <div class="card-body" style="margin-top: 10px;">
+            
             <div>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -60,16 +61,16 @@
                             data-export-types="['pdf', 'doc', 'excel', 'csv' , 'json', 'xml', 'png', 'txt', 'sql']">
                             <thead>
                                 <tr>
-                                    <th data-field="sn" width="7%"><a href = "{{ url('claims-summary') }}" title="CLICK HERE TO RETURN TO REGISTER"><i  class="fa fa-reply-all btn-secondary"></i></a> &nbsp;S/No</th>
+                                    <th data-field="sn" width="7%"><a href = "{{ url('claimsSummary') }}" title="CLICK HERE TO RETURN TO REGISTER"><i  class="fa fa-reply-all btn-secondary"></i></a> &nbsp;S/No</th>
                                     <th data-field="date" width="6.5%">Date of Claim</th>
                                     <th data-field="ecode" width="12.5%">Enrollee Code</th>
                                     <th data-field="ename" width="12.5%">Enrollee Name</th>
 
                                     <th data-field="hcp" width="12.5%">Provider Name</th>
-                                    <th data-field="auth" width="12.5%">Authorization Code</th>
-                                    <th data-field="diag" width="12.5%">Diagnosis</th>
                                     <th data-field="amt" width="12.5%">Claim Amount</th>
                                     <th data-field="month" width="11.5%">Month Of Claim</th>
+                                    <th data-field="auth" width="12.5%">Authorization Code</th>
+                                    <th data-field="diag" width="12.5%">Diagnosis</th>
 
                                     <th data-field="action" width="6.6%"></th>
                                 </tr>
@@ -88,15 +89,18 @@
                                     <td style="padding:5px" width="12.5%">&nbsp; {{$claim->enrollee_code}}</td>
                                     <td style="padding:5px" width="12.5%">&nbsp; {{$claim->enrollee_name}}</td>
                                     <td style="padding:5px" width="12.5%">&nbsp; {{$claim->hcp_name}}</td>
+                                    <td style="padding:5px" width="12.5%">&nbsp; {{ number_format($claim->claim_amount,2) }}</td>
+                                    <td style="padding:5px" width="12.5%">&nbsp; {{$claim->month}} {{$claim->year}}</td>
                                     <td style="padding:5px" width="12.5%">&nbsp; {{$claim->authorization_code}}</td>
                                     <td style="padding:5px" width="12.5%">&nbsp; {{$claim->diagnosis}}</td>
-                                    <td style="padding:5px" width="12.5%">&nbsp; {{$claim->claim_amount}}</td>
-
-                                    <td style="padding:5px" width="12.5%">&nbsp; {{$claim->month}} {{$claim->year}}</td>
-                                    <td style="padding:5px" width="6.6%" class="datatable-ct" style="text-align:center" align="center">
-                                      &nbsp;<a href="#" class="btn btn-sm btn-secondary" title="View Record"> <i class="fa fa-eye"></i></a> 
-                                      &nbsp;<a href="#" class="btn btn-sm btn-success" title="Edit Record"> <i class="fa fa-pencil"></i></a> 
-                                      &nbsp;<a href="#" class="btn btn-sm btn-danger" title="Delete Record"> <i class="fa fa-trash"></i></a> 
+                                    <td>
+                                        <a href=" {{route('tariffs.show', $claim->id)}} " class="btn btn-sm btn-primary">View</a>
+                                        <a href=" {{route('editClaims', $claim->id)}} " class="btn btn-sm btn-success">Edit</a>
+                                        <form action="{{route('claims.destroy', $claim->id) }}" method="POST" class="d-inline">
+                                          @csrf
+                                          @method('DELETE')
+                                          <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this tariff?')">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                               @endforeach

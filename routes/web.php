@@ -30,7 +30,7 @@ Route::middleware([
 
 //Insights
 Route::get('/dashboards/claimsInsight', [ClaimsController::class, 'claimsDashboard'])->name('claimsDashboard');
-Route::get('/dashboards/providersInsight', [ClaimsController::class, 'providersDashboard'])->name('providersDashboard');
+Route::get('/dashboards/providerInsight', [ClaimsController::class, 'providersDashboard'])->name('providersDashboard');
 
 //Users
 Route::get('/users/create', [ClaimsController::class, 'createUser'])->name('createUser');
@@ -38,8 +38,13 @@ Route::post('/users', [ClaimsController::class, 'storeUser'])->name('storeUser')
 Route::get('/users/view', [ClaimsController::class, 'viewUser'])->name('viewUser');
 
 //Claims
-Route::get('/claims', [ClaimsController::class, 'claims'])->name('claims');
-Route::get('/claims-summary', [ClaimsController::class, 'claimsSummary'])->name('claimsSummary');
+Route::get('/claimsDetail', [ClaimsController::class, 'claimsDetail'])->name('claimsDetail');
+Route::get('/claimsSummary', [ClaimsController::class, 'claimsSummary'])->name('claimsSummary');
+Route::delete('/claims/{id}', 'App\Http\Controllers\ClaimsController@claimsDestroy')->name('claims.destroy');
+Route::get('/claims/createClaims', [ClaimsController::class, 'createClaims'])->name('createClaims');
+Route::post('/claims/storeClaims', [ClaimsController::class, 'storeClaims'])->name('storeClaims');
+Route::get('/claims/edit/{claim}', [ClaimsController::class, 'editClaims'])->name('editClaims');
+
 
 //Registers
 Route::get('/providers', [ClaimsController::class, 'providers'])->name('providers');

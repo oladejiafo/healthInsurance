@@ -57,7 +57,7 @@
 
                                 <th data-field="name" width="30.6%">Provider Name</th>
                                 <th data-field="claims" width="16.6%">Number of Claims</th>
-                                <th data-field="amount" width="16.6%">Total Claims Amount</th>
+                                <th data-field="amount" align="right" width="16.6%">Total Claims Amount</th>
                                 <th data-field="month" width="18.6%">Month of Claim</th>
                                 <th data-field="action" width="16.6%"></th>
                             </tr>
@@ -67,10 +67,10 @@
                             <tr>
                                 <td style="padding:5px" width="30.6%">&nbsp; {{$claim->hcp_name}}</td>
                                 <td style="padding:5px" width="16.6%">&nbsp; {{$claim->ID}}</td>
-                                <td style="padding:5px" width="16.6%">&nbsp; {{$claim->amt}}</td>
+                                <td style="padding:5px" align="right" width="16.6%">&nbsp; {{ number_format($claim->amt,2) }}</td>
                                 <td style="padding:5px" width="18.6%">&nbsp; {{$claim->month}} {{$claim->year}}</td>
                                 <td style="padding:5px" width="16.6%" class="datatable-ct" style="text-align:center" align="center">
-                                    &nbsp;<a href="{{ url('claims') }}?{{ http_build_query([    'hcp_name' => $claim->hcp_name,    'month' => $claim->month,    'year' => $claim->year,]) }}" class="btn btn-sm btn-success" title="CLICK HERE TO OPEN DETAILS FOR VETTING"> <i class="fa fa-angle-double-down" style="font-size:19px"></i></a>
+                                    &nbsp;<a href="{{ url('claimsDetail') }}?{{ http_build_query([    'hcp_name' => $claim->hcp_name,    'month' => $claim->month,    'year' => $claim->year,]) }}" class="btn btn-sm btn-success" title="CLICK HERE TO OPEN DETAILS FOR VETTING"> <i class="fa fa-angle-double-down" style="font-size:19px"></i></a>
                                 </td>
                             </tr>
                             @endforeach
