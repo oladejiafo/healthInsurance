@@ -42,8 +42,9 @@ Route::get('/claimsDetail', [ClaimsController::class, 'claimsDetail'])->name('cl
 Route::get('/claimsSummary', [ClaimsController::class, 'claimsSummary'])->name('claimsSummary');
 Route::delete('/claims/{id}', 'App\Http\Controllers\ClaimsController@claimsDestroy')->name('claims.destroy');
 Route::get('/claims/createClaims', [ClaimsController::class, 'createClaims'])->name('createClaims');
-Route::post('/claims/storeClaims', [ClaimsController::class, 'storeClaims'])->name('storeClaims');
 Route::get('/claims/edit/{claim}', [ClaimsController::class, 'editClaims'])->name('editClaims');
+Route::post('/claims/storeClaims', [ClaimsController::class, 'storeClaims'])->name('storeClaims');
+Route::match(['post', 'put'],'/claims/updateClaims/{id}', [ClaimsController::class, 'updateClaims'])->name('updateClaims');
 
 
 //Registers

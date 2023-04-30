@@ -99,6 +99,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Create User') }}
                                     </button>
+                                    <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a>
                                 </div>
                             </div>
                         </form>

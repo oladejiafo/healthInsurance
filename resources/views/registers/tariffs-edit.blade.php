@@ -113,7 +113,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Edit</button>
-                            <a href="{{ route('tariffs') }}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>

@@ -35,6 +35,7 @@
 
             <!-- Page Content -->
                 @yield('content')
+                
                 @include('footer')
         </div>
 

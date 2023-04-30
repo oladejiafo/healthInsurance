@@ -98,6 +98,7 @@
                         <div class="form-group mb-0">
 
                             <button type="submit" class="btn btn-primary">Create</button>
+                            <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>

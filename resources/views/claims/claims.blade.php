@@ -13,6 +13,14 @@
 <script src="extensions/resizable/bootstrap-table-resizable.js"></script>
 
 @extends('layouts.app')
+
+@auth
+@php
+   $user = auth()->user();
+   $role = $user->role;
+@endphp
+@endauth
+
 @section('content')
     
     <div class="container">
@@ -96,11 +104,13 @@
                                     <td>
                                         <a href=" {{route('tariffs.show', $claim->id)}} " class="btn btn-sm btn-primary">View</a>
                                         <a href=" {{route('editClaims', $claim->id)}} " class="btn btn-sm btn-success">Edit</a>
+                                        @if ($role->slug =='super_admin' || $role->slug =='admin' || $role->slug =='medical_head')
                                         <form action="{{route('claims.destroy', $claim->id) }}" method="POST" class="d-inline">
                                           @csrf
                                           @method('DELETE')
                                           <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this tariff?')">Delete</button>
                                         </form>
+                                        @endif 
                                     </td>
                                 </tr>
                               @endforeach
@@ -119,7 +129,7 @@
 @endsection 
 
  @push('scripts')
-    -->
+
     <!-- data table JS
       ============================================ -->
     <script src="{{ asset('js/data-table/bootstrap-table.js') }}"></script>
@@ -131,5 +141,5 @@
     <script src="{{ asset('js/data-table/colResizable-1.5.source.js') }}"></script>
     <script src="{{ asset('js/data-table/bootstrap-table-export.js') }}"></script>
 
-    <!--
+    
 @endpush 
